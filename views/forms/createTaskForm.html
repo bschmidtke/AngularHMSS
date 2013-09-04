@@ -1,0 +1,35 @@
+﻿<div ng-controller="CreateTaskController">
+    <form id="taskDetails" action="" >
+	    <fieldset>
+		    <legend>Add New Task</legend>
+		    Task: <input data-ng-model="newTask.taskName" type="text" size="50" />
+		    <br/>
+		    Agent assigned:
+		    <select data-ng-model="newTask.assignedId" >
+			    <option value="001">001</option>
+			    <option value="002">002</option>
+			    <option value="003">003</option>
+			    <option value="004">004</option>
+			    <option value="005">005</option>
+			    <option value="006">006</option>
+			    <option value="007">007</option>
+			    <option value="008">008</option>
+			    <option value="009">009</option>
+			    <option value="0010">0010</option>
+			    <option value="0011">0011</option>
+			    <option value="0012">0012</option>
+			    <option value="0013">0013</option>
+			    <option value="0014">0014</option>
+		    </select>
+		    <br/>
+		    Priority:
+		    <br/>
+		    <input data-ng-model="newTask.priority" type="radio" name="priority" value="high" />High<br/>
+		    <input data-ng-model="newTask.priority" type="radio" name="priority" value="medium" checked="checked">Medium<br/>
+		    <input data-ng-model="newTask.priority" type="radio" name="priority" value="low" />Low<br/>
+	    </fieldset>
+    </form>
+
+    <input value="Save" type="button" ng-click="save_clickHandler()" />
+    <input value="Cancel" type="button" ng-click="cancel_clickHandler()" />
+</div>

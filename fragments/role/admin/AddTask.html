@@ -1,3 +1,10 @@
 ﻿<div data-ng-controller="AddTaskController">
-    <input id="addBtn" value="Add" type="button" ng-click="addTask()" />
+    
+    <input value="Add" 
+           type="button" 
+           ng-click="enableTaskForm()"
+           ng-disabled="showAddTaskForm" />
+    
+    <div ng-show="showAddTaskForm" ng-include="'views/forms/createTaskForm.html'"></div>
+
 </div>

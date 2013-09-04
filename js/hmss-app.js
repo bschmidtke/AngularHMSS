@@ -6,7 +6,7 @@
         if (AgentService.getUser() == null)
         {
             // no logged user, we should be going to #login
-            if (next.templateUrl == "fragments/forms/login.html")
+            if (next.templateUrl == "views/forms/login.html")
             {
                 // already going to #login, no redirect needed
             } else
@@ -21,13 +21,13 @@
 
 function config($routeProvider, $httpProvider) 
 {
-    $routeProvider.when('/login', { templateUrl: 'fragments/forms/login.html' })
-                  .when('/main', { templateUrl: 'fragments/views/main.html' })
-                  .when('/intel', { templateUrl: 'fragments/views/intel.html' })
-                  .when('/labs', { templateUrl: 'fragments/views/labs.html' })
-                  .when('/targets', { templateUrl: 'fragments/views/targets.html' })
-                  .when('/targetDetail/:targetId', { templateUrl: 'fragments/views/targetDetails.html' })
-                  .when('/tasks', { templateUrl: 'fragments/views/tasks.html' })
+    $routeProvider.when('/login', { templateUrl: 'views/forms/login.html' })
+                  .when('/main', { templateUrl: 'views/main.html' })
+                  .when('/intel', { templateUrl: 'views/intel.html' })
+                  .when('/labs', { templateUrl: 'views/labs.html' })
+                  .when('/targets', { templateUrl: 'views/targets/targets.html' })
+                  .when('/targetDetail/:targetId', { templateUrl: 'views/targets/targetDetails.html' })
+                  .when('/tasks', { templateUrl: 'views/tasks.html' })
                   .otherwise({ redirectTo: '/login' });
     
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
