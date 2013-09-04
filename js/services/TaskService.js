@@ -5,17 +5,25 @@ hmssModule.factory('TaskService', function ($http, $rootScope) {
     var _tasks = [];
 
     return {
-        getTasks: function () {
+        getTasks: function()
+        {
             return _tasks;
         },
-        setTasks: function (val) {
+        setTasks: function(val)
+        {
             _tasks = val;
 
             $rootScope.$broadcast('tasksChangedEvent');
         },
-        loadTasks: function () {
+        loadTasks: function()
+        {
             return $http({ method: 'GET', url: ('assets/data/tasks.txt') });
+        },
+        addTask: function(task)
+        {
+            _tasks.push(task);
+            
+            $rootScope.$broadcast('tasksChangedEvent');
         }
-    }
-
+    };
 });
