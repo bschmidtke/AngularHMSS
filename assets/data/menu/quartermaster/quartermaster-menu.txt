@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Intel",
+		"route": "/intel",
+        "url": "views/roles/quartermaster/intel.html",
+        "isRedirect": "true"
+	},
+	{
+		"name": "Tasks",
+		"route": "/tasks",
+		"url": "views/roles/quartermaster/tasks.html",
+		"isRedirect": "true"
+	}
+]

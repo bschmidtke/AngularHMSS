@@ -1,0 +1,24 @@
+﻿<div data-ng-controller="TasksController" class="tab-content">
+    <table class="tasks-table">
+        <thead class="tasks-table-header">
+            <tr>
+                <td>Task</td>
+                <td>Agent Assigned</td>
+                <td>Priority</td>
+            </tr>
+        </thead>
+        <tbody ng-repeat='userTask in taskData'>
+            <tr id="template" class="task-item-row">
+                <td class="task-item-cell">{{userTask.taskName}}</td>
+                <td class="task-item-cell">{{userTask.assignedId}}</td>
+                <td class="task-item-cell"><img src="{{ getImageForPriority( userTask.priority )}}" /></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div ng-switch on="agent.role">
+        <div ng-switch-when="admin" ng-include="'/fragments/role/admin/AddTask.html'"></div>
+        <div ng-show="showAddTaskForm" ng-include="/fragments/forms/createTaskForm.html"></div>
+    </div>
+
+</div>

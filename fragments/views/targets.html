@@ -1,0 +1,30 @@
+﻿<div data-ng-controller="TargetsController" class="tab-content">
+    
+    <!--<div id="map" style="width:100%;margin:0;padding:0;height:500px;"></div> -->
+    <google-map 
+        center="center" 
+        draggable="true" 
+        zoom="zoom" 
+        mark-click="true"
+        mapTypeId="mapTypeId" 
+        style="display:block;width:100%;margin:0;padding:0;height:500px;"></google-map>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Last Known Location</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody class="targets-list" ng-repeat='target in getTargetData()'>
+            <tr class="targets-row" ng-click="targetRowClicked(target);">
+                <td><img src="{{target.image}}" /></td>
+                <td>{{target.name}}</td>
+                <td>{{target.lastKnownLocation}}</td>
+                <td>{{target.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

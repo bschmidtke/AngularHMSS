@@ -1,0 +1,6 @@
+﻿<div data-ng-controller="IntelController" class="tab-content">
+	    <div class="intel-list-item" ng-repeat='intelItem in intelData'>
+	        <div class="intel-title"><a href="{{intelItem.link}}" ng-bind-html-unsafe="intelItem.title" ></a></div>
+	        <div class="intel-description" ng-bind-html-unsafe="intelItem.description" />
+	    </div>
+</div>

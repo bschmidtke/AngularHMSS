@@ -1,0 +1,5 @@
+<div id="mainMenu" class="v-nav" ng-controller="MainMenuController">
+    <div ng-repeat="item in menuItems" ng-show="sessionCheck()" class="verticalTabs">
+        <div class="verticalTab" id="template" ng-click="itemClicked(item)">{{item.name}}</div>
+    </div>
+</div>

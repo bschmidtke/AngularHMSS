@@ -1,0 +1,19 @@
+﻿<div data-ng-controller="LabsController" class="tab-content">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="gadgets" ng-repeat='gadget in gadgetData'>
+            <tr id="template" class="gadget-item-row">
+                <td>{{gadget.name}}</td>
+                <td><img src="{{gadget.image}}" width="150"></td>
+                <td>{{gadget.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
