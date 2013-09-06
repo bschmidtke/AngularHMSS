@@ -3,7 +3,7 @@ hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
     // Define the route to this controller
     $routeProvider.when( ROUTE_LOGIN.uri, { templateUrl: 'views/forms/login.html' } );
 })
-.controller('LoginController', function ($scope, $location, AgentService, ROUTE_MAIN)
+.controller('LoginController', function ($scope, $location, AgentService, AccessService, ROUTE_MAIN)
     {
         $scope.attempts = 0;
         $scope.maximumAttempts = 3;
@@ -11,6 +11,7 @@ hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
 
         $scope.incorrectLoginMsg = "Codename / Passcode is Incorrect.";
         $scope.maximumAttemptsMsg = "Maximum login attempts exceeded.";
+        $scope.accessError = "Unable to load security settings for your account.";
         $scope.currentErrorMsg = null;
 
         $scope.attemptLogin = function($evt)
@@ -42,17 +43,26 @@ hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
             }
         };
 
-        $scope.loginSuccessHandler = function (data, status, headers, config)
-        {
-            AgentService.setUser( data );
+        $scope.loginSuccessHandler = function(data, status, headers, config) {
+            var agent = AgentService.getUser();
+            
+            var accessPromise = AccessService.loadAccess(agent.role);
+            accessPromise.success($scope.accessLoadSuccessHandler);
+            accessPromise.error($scope.accessLoadErrorHandler);
+            
+        };
 
-            $location.path(ROUTE_MAIN.uri);
-        }
-
-        $scope.loginErrorHandler = function (data, status, headers, config)
-        {
+        $scope.loginErrorHandler = function (data, status, headers, config) {
             $scope.toggleErrorMsg(true, $scope.incorrectLoginMsg);
-        }
+        };
+
+        $scope.accessLoadSuccessHandler = function (data, status, headers, config) {
+            $location.path(ROUTE_MAIN.uri);
+        };
+
+        $scope.accessLoadErrorHandler = function (data, status, headers, config) {
+            $scope.toggleErrorMsg(true, $scope.accessError);
+        };
 
         $scope.toggleErrorMsg = function(isError, reason)
         {

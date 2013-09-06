@@ -9,14 +9,6 @@ hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $l
 
         // location change is about to occur.
         $log.log("location change start: " + newUrl + " -- " + path);
-
-        if (!HmssRouteService.hasAccess(path)) {
-            // do not allow the user to continue.
-            // angularEvent.preventDefault();
-
-            // reroute to the insufficient credentials page
-            $location.path ( ROUTE_INSUFFICIENT_CREDENTIALS.uri );
-        }
     });
     
     // undocumented
@@ -39,7 +31,8 @@ hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $l
             // the path we are going to.
             var path = $location.path();
 
-            if (!HmssRouteService.hasAccess(path)) {
+            var userAllowedAccess = HmssRouteService.hasAccess(path);
+            if (!userAllowedAccess) {
                 // do not allow the user to continue.
                 // angularEvent.preventDefault();
 
