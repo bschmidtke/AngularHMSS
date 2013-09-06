@@ -1,5 +1,5 @@
 ﻿var hmssModule = angular.module('hmssModule');
-hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService, HmssRouteService, ROUTE_INSUFFICIENT_CREDENTIALS ) {
+hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService, HmssRouteService, ROUTE_LOGIN, ROUTE_INSUFFICIENT_CREDENTIALS) {
 
     // undocumented
     $rootScope.$on("$locationChangeStart", function (angularEvent, newUrl, oldUrl) {
@@ -33,12 +33,7 @@ hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $l
         $log.log("route change start");
         if (AgentService.getUser() == null) {
             // no logged user, we should be going to #login
-            if (next.templateUrl == "views/forms/login.html") {
-                // already going to #login, no redirect needed
-            } else {
-                // not going to #login, we should redirect now
-                $location.path("/login");
-            }
+            $location.path( ROUTE_LOGIN.uri );
         }
     });
     
