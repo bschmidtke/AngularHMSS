@@ -20,7 +20,6 @@ hmssModule.controller('LoginController', function ($scope, $location, AgentServi
             if (!$scope.loginPreflight())
             {
                 var msg = AgentService.login(un, pw);
-                msg.success($scope.loginSuccessHandler);
                 msg.error($scope.loginErrorHandler);
             }
         };
@@ -38,17 +37,10 @@ hmssModule.controller('LoginController', function ($scope, $location, AgentServi
             }
         };
 
-        $scope.loginSuccessHandler = function (data, status, headers, config)
-        {
-            AgentService.setUser( data );
-
-            $location.path('/main');
-        }
-
         $scope.loginErrorHandler = function (data, status, headers, config)
         {
             $scope.toggleErrorMsg(true, $scope.incorrectLoginMsg);
-        }
+        },
 
         $scope.toggleErrorMsg = function(isError, reason)
         {

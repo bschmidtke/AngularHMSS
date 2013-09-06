@@ -1,5 +1,6 @@
-﻿function initialize($rootScope, $location, AgentService)
+﻿function initialize($rootScope, $location, AgentService, HMSSRouteFactory)
 {
+    HMSSRouteFactory.initPublicRoutes();
     // register listener to watch route changes
     $rootScope.$on("$routeChangeStart", function(event, next, current)
     {
@@ -15,12 +16,24 @@
                 $location.path("/login");
             }
         }
-    }
-    );
+    }),
+    $rootScope.$on("agentMenuChanged", function (event, next, current) {
+        // temp, menu data has loaded, redirect to home page
+        $location.path("/main");
+    });
 };
 
-function config($routeProvider, $httpProvider) 
+function configHttp( $httpProvider )
 {
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+};
+
+function configRoutes($routeProvider)
+{
+    // exposing the route provider...
+    hmssModule._routeProvider = $routeProvider;
+    
+    /*
     $routeProvider.when('/login', { templateUrl: 'views/forms/login.html' })
                   .when('/main', { templateUrl: 'views/main.html' })
                   .when('/intel', { templateUrl: 'views/intel.html' })
@@ -28,11 +41,11 @@ function config($routeProvider, $httpProvider)
                   .when('/targets', { templateUrl: 'views/targets/targets.html' })
                   .when('/targetDetail/:targetId', { templateUrl: 'views/targets/targetDetails.html' })
                   .when('/tasks', { templateUrl: 'views/tasks.html' })
-                  .otherwise({ redirectTo: '/login' });
-    
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+                  .otherwise({ redirectTo: '/login' });*/
+
 };
 
 var hmssModule = angular.module('hmssModule', ["google-maps"]);
-hmssModule.config(config);
+hmssModule.config( configHttp );
+hmssModule.config( configRoutes );
 hmssModule.run( initialize );

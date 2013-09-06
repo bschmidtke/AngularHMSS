@@ -11,36 +11,32 @@ hmssModule.controller('MainMenuController', function ($scope, $location, AgentSe
 
     $scope.menuItems = [];
 
-    $scope.sessionCheck = function ()
+    $scope.sessionCheck = function()
     {
         var usr = AgentService.getUser();
-        return !( usr == null );
+        return !(usr == null);
     },
-
     $scope.$on('agentChangedEvent', function(event, next, current)
     {
-        var usr = AgentService.getUser();
-        if( usr != null )
+        var menu = AgentService.getMenu();
+        if (menu == null)
         {
-            var promise = AgentService.loadMenu( usr.role );
-            promise.success( $scope.menuLoadedSuccess );
-            promise.error( $scope.menuLoadErrorHandler );
-        }
-        else
+            var usr = AgentService.getUser();
+            AgentService.loadMenu(usr.role);
+        } else
         {
-
+            $scope.configMenuItems();
         }
     }),
-
-    $scope.menuLoadedSuccess = function (data, status, headers, config)
+    $scope.$on('agentMenuChanged', function(event, next, current)
     {
-        $scope.menuItems = data;
-    },
-
-    $scope.menuLoadErrorHandler = function (data, status, headers, config)
+        $scope.configMenuItems();
+    }),
+    
+    $scope.configMenuItems = function()
     {
-
-    },
+        $scope.menuItems = AgentService.getMenu();
+    };
 
     $scope.itemClicked = function ( selectedItem )
     {
