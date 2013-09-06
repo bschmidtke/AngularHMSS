@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="hmssModule" xmlns="http://www.w3.org/1999/xhtml">
+<html ng-app="hmssModule" ng-controller="LocationInterceptor" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>HMSS</title>
         <link rel="stylesheet" href="assets/css/hmss-app.css"/>
@@ -19,9 +19,12 @@
         </table>
     </body>
     <script src="/js/controllers/header/HeaderController.js"></script>
-    <script src="/js/hmss-app.js"></script>
 
+    <script src="/js/hmss-app.js"></script>
+    
     <script src="/libs/Maps/angular-google-maps.js"></script>
+    <!-- Constants -->
+    <script src="/js/constants/RouteConstants.js"></script>
     <!-- Services -->
     <script src="/js/services/AgentService.js"></script>
     <script src="/js/services/LabsService.js"></script>
@@ -29,6 +32,7 @@
     <script src="/js/services/TaskService.js"></script>
     <script src="/js/services/TargetsService.js"></script>
     <!-- Controllers -->
+    <script src="/js/controllers/location/LocationInterceptor.js"></script>
     <script src="/js/controllers/login/LoginController.js"></script>
     <script src="/js/controllers/labs/LabsController.js"></script>
     <script src="/js/controllers/main/MainController.js"></script>

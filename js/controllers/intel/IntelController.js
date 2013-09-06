@@ -1,6 +1,13 @@
 ﻿
 var hmssModule = angular.module('hmssModule');
-hmssModule.controller('IntelController', function($scope, $location, IntelService)
+
+
+hmssModule.config(function($routeProvider, ROUTE_INTEL) {
+    // Define the route to this controller
+    $routeProvider.when(ROUTE_INTEL.uri, { templateUrl: 'views/intel.html' });
+});
+
+hmssModule.controller('IntelController', function ($scope, $location, IntelService)
 {
 
     $scope.intelData = IntelService.getIntel();

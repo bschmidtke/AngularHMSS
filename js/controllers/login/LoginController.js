@@ -1,5 +1,9 @@
 ﻿var hmssModule = angular.module('hmssModule');
-hmssModule.controller('LoginController', function ($scope, $location, AgentService)
+hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
+    // Define the route to this controller
+    $routeProvider.when( ROUTE_LOGIN.uri, { templateUrl: 'views/forms/login.html' } );
+})
+.controller('LoginController', function ($scope, $location, AgentService)
     {
         $scope.attempts = 0;
         $scope.maximumAttempts = 3;

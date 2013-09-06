@@ -1,6 +1,11 @@
 ﻿
 var hmssModule = angular.module('hmssModule');
-hmssModule.controller('TargetsController', function ($scope, $location, TargetsService)
+
+hmssModule.config(function ($routeProvider, ROUTE_TARGETS) {
+    // Define the route to this controller
+    $routeProvider.when(ROUTE_TARGETS.uri, { templateUrl: 'views/targets/targets.html' });
+})
+.controller('TargetsController', function ($scope, $location, TargetsService)
 {
 
     var _targetData = TargetsService.getTargets();

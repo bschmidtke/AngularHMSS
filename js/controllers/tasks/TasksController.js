@@ -1,5 +1,11 @@
 ﻿
 var hmssModule = angular.module('hmssModule');
+
+hmssModule.config(function ($routeProvider, ROUTE_TASKS) {
+    // Define the route to this controller
+    $routeProvider.when(ROUTE_TASKS.uri, { templateUrl: 'views/tasks.html' });
+});
+
 hmssModule.controller('TasksController', function ($scope, $location, AgentService, TaskService)
 {
 
