@@ -34,6 +34,18 @@ hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $l
         if (AgentService.getUser() == null) {
             // no logged user, we should be going to #login
             $location.path( ROUTE_LOGIN.uri );
+        } else {
+            
+            // the path we are going to.
+            var path = $location.path();
+
+            if (!HmssRouteService.hasAccess(path)) {
+                // do not allow the user to continue.
+                // angularEvent.preventDefault();
+
+                // reroute to the insufficient credentials page
+                $location.path(ROUTE_INSUFFICIENT_CREDENTIALS.uri);
+            }
         }
     });
     

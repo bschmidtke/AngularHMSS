@@ -3,7 +3,7 @@ hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
     // Define the route to this controller
     $routeProvider.when( ROUTE_LOGIN.uri, { templateUrl: 'views/forms/login.html' } );
 })
-.controller('LoginController', function ($scope, $location, AgentService)
+.controller('LoginController', function ($scope, $location, AgentService, ROUTE_MAIN)
     {
         $scope.attempts = 0;
         $scope.maximumAttempts = 3;
@@ -46,7 +46,7 @@ hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
         {
             AgentService.setUser( data );
 
-            $location.path('/main');
+            $location.path(ROUTE_MAIN.uri);
         }
 
         $scope.loginErrorHandler = function (data, status, headers, config)
