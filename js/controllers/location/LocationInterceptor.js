@@ -1,13 +1,26 @@
 ﻿var hmssModule = angular.module('hmssModule');
-hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService) {
+hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService, HmssRouteService, ROUTE_INSUFFICIENT_CREDENTIALS ) {
 
     // undocumented
-    $rootScope.$on("$locationChangeStart", function(newUrl, oldUrl) {
-        $log.log("location change start");
+    $rootScope.$on("$locationChangeStart", function (angularEvent, newUrl, oldUrl) {
+
+        // the path we are going to.
+        var path = $location.path();
+
+        // location change is about to occur.
+        $log.log("location change start: " + newUrl + " -- " + path);
+
+        if (!HmssRouteService.hasAccess(path)) {
+            // do not allow the user to continue.
+            // angularEvent.preventDefault();
+
+            // reroute to the insufficient credentials page
+            $location.path ( ROUTE_INSUFFICIENT_CREDENTIALS.uri );
+        }
     });
     
     // undocumented
-    $rootScope.$on("$locationChangeSuccess", function (newUrl, oldUrl) {
+    $rootScope.$on("$locationChangeSuccess", function (angularEvent, newUrl, oldUrl) {
         $log.log("location change success");
     });
 

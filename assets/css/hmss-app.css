@@ -474,6 +474,13 @@ table {
     text-decoration: none;
 }
 
+.error-header {
+    font-weight: bold;
+}
+
+.error-body {
+}
+
 /* INTEL */
 .intel-list {
     border: 1px solid #DDD;
