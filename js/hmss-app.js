@@ -1,6 +1,6 @@
-﻿function initialize($rootScope, $location, AgentService) {
+﻿// TODO: Clean up? Or use later. Leaving here as a reminder about the mpdule.run( func ) method.
+function initialize($rootScope, $location, AgentService) {
     // do stuff
-    
 };
 
 function configRoutes($routeProvider, $httpProvider, ROUTE_UNKNOWN_RESOURCE) {

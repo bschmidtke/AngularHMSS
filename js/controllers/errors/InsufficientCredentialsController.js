@@ -8,5 +8,5 @@ hmssModule.config(function ($routeProvider, ROUTE_INSUFFICIENT_CREDENTIALS) {
 });
 
 hmssModule.controller('InsufficientCredentialsController', function ($scope, $location) {
-
+    // placeholder
 });

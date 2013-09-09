@@ -7,5 +7,5 @@ hmssModule.config(function ($routeProvider, ROUTE_UNKNOWN_RESOURCE) {
 });
 
 hmssModule.controller('UnknownResourceController', function ($scope, $location) {
-
+    // placeholder
 });

@@ -5,5 +5,5 @@ hmssModule.config(function ($routeProvider, ROUTE_MAIN) {
 })
 .controller('MainController', function ($scope, $location)
 {
-
+    // placeholder
 })
