@@ -5,7 +5,7 @@ function initialize($rootScope, $location, AgentService) {
 
 function configRoutes($routeProvider, $httpProvider, ROUTE_UNKNOWN_RESOURCE) {
     
-    // default view is the login view.
+    // Register the unknown resource view as the otherwise route.
     $routeProvider.otherwise({ redirectTo: ROUTE_UNKNOWN_RESOURCE.uri });
     
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
