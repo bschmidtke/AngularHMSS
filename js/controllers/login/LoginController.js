@@ -1,8 +1,8 @@
 ﻿
-define(['js/services/user/AgentService', 'js/services/user/AccessService', 'js/constants/RouteConstants'], function () {
-
-    console.log("> Registering LoginController");
-
+define(['js/services/user/AgentService',
+        'js/services/user/AccessService',
+        'js/constants/RouteConstants'], function () {
+    
     var hmssModule = angular.module('hmssModule');
     //hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
     //    // Define the route to this controller
