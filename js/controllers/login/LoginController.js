@@ -1,67 +1,74 @@
-﻿var hmssModule = angular.module('hmssModule');
-//hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
-//    // Define the route to this controller
-//    //$routeProvider.when(ROUTE_LOGIN.uri, { templateUrl: 'views/forms/login.html' });
-//})
-hmssModule.controller('LoginController', function ($scope, $location, AgentService, AccessService, ROUTE_MAIN) {
-    
-    $scope.attempts = 0;
-    $scope.maximumAttempts = 3;
-    $scope.isError = false;
+﻿
+define(['js/services/user/AgentService', 'js/services/user/AccessService', 'js/constants/RouteConstants'], function () {
 
-    $scope.incorrectLoginMsg = "Codename / Passcode is Incorrect.";
-    $scope.maximumAttemptsMsg = "Maximum login attempts exceeded.";
-    $scope.accessError = "Unable to load security settings for your account.";
-    $scope.currentErrorMsg = null;
+    console.log("> Registering LoginController");
 
-    $scope.attemptLogin = function($evt) {
-        var un = $scope.newUser.userName;
-        var pw = $scope.newUser.password;
+    var hmssModule = angular.module('hmssModule');
+    //hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {
+    //    // Define the route to this controller
+    //    //$routeProvider.when(ROUTE_LOGIN.uri, { templateUrl: 'views/forms/login.html' });
+    //})
+    hmssModule.controller('LoginController', function ($scope, $location, AgentService, AccessService, ROUTE_MAIN) {
 
-        $scope.attempts++;
+        $scope.attempts = 0;
+        $scope.maximumAttempts = 3;
+        $scope.isError = false;
 
-        // check number of attempts
-        if (!$scope.loginPreflight()) {
-            var msg = AgentService.login(un, pw);
-            msg.success($scope.loginSuccessHandler);
-            msg.error($scope.loginErrorHandler);
-        }
-    };
+        $scope.incorrectLoginMsg = "Codename / Passcode is Incorrect.";
+        $scope.maximumAttemptsMsg = "Maximum login attempts exceeded.";
+        $scope.accessError = "Unable to load security settings for your account.";
+        $scope.currentErrorMsg = null;
 
-    $scope.loginPreflight = function() {
-        if ($scope.attempts >= $scope.maximumAttempts) {
-            $scope.toggleErrorMsg(true, $scope.maximumAttemptsMsg);
-            return true;
-        } else {
-            return false;
-        }
-    };
+        $scope.attemptLogin = function ($evt) {
+            var un = $scope.newUser.userName;
+            var pw = $scope.newUser.password;
 
-    $scope.loginSuccessHandler = function(data, status, headers, config) {
-        var agent = AgentService.getUser();
+            $scope.attempts++;
 
-        var accessPromise = AccessService.loadAccess(agent.role);
-        accessPromise.success($scope.accessLoadSuccessHandler);
-        accessPromise.error($scope.accessLoadErrorHandler);
+            // check number of attempts
+            if (!$scope.loginPreflight()) {
+                var msg = AgentService.login(un, pw);
+                msg.success($scope.loginSuccessHandler);
+                msg.error($scope.loginErrorHandler);
+            }
+        };
 
-    };
+        $scope.loginPreflight = function () {
+            if ($scope.attempts >= $scope.maximumAttempts) {
+                $scope.toggleErrorMsg(true, $scope.maximumAttemptsMsg);
+                return true;
+            } else {
+                return false;
+            }
+        };
 
-    $scope.loginErrorHandler = function(data, status, headers, config) {
-        $scope.toggleErrorMsg(true, $scope.incorrectLoginMsg);
-    };
+        $scope.loginSuccessHandler = function (data, status, headers, config) {
+            var agent = AgentService.getUser();
 
-    $scope.accessLoadSuccessHandler = function(data, status, headers, config) {
-        $location.path(ROUTE_MAIN.uri);
-    };
+            var accessPromise = AccessService.loadAccess(agent.role);
+            accessPromise.success($scope.accessLoadSuccessHandler);
+            accessPromise.error($scope.accessLoadErrorHandler);
 
-    $scope.accessLoadErrorHandler = function(data, status, headers, config) {
-        $scope.toggleErrorMsg(true, $scope.accessError);
-    };
+        };
 
-    $scope.toggleErrorMsg = function(isError, reason) {
-        $scope.isError = isError;
-        $scope.currentErrorMsg = reason;
-    };
-}
-);
+        $scope.loginErrorHandler = function (data, status, headers, config) {
+            $scope.toggleErrorMsg(true, $scope.incorrectLoginMsg);
+        };
+
+        $scope.accessLoadSuccessHandler = function (data, status, headers, config) {
+            $location.path(ROUTE_MAIN.uri);
+        };
+
+        $scope.accessLoadErrorHandler = function (data, status, headers, config) {
+            $scope.toggleErrorMsg(true, $scope.accessError);
+        };
+
+        $scope.toggleErrorMsg = function (isError, reason) {
+            $scope.isError = isError;
+            $scope.currentErrorMsg = reason;
+        };
+    }
+    );
+
+});
 

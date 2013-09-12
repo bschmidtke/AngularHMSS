@@ -62,26 +62,21 @@ define(['js/constants/RouteConstants',
 
     function config($routeProvider, $httpProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, ROUTE_MAIN, ROUTE_LABS, ROUTE_UNKNOWN_RESOURCE, ROUTE_LOGIN) {
 
-        console.log('hmssModule.preConfig');
+        console.log('hmssModule.config');
         
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         
-        /*
-        hmssModule._registerController = $controllerProvider.register;
-        hmssModule._registerDirective = $compileProvider.directive;
-        hmssModule._registerFilter = $filterProvider.register;
-        hmssModule._registerFactory = $provide.factory;
-        hmssModule._registerService = $provide.service;    
-        */
-
+        // Register routes
         registerRoutes($routeProvider, ROUTE_MAIN, ROUTE_LABS, ROUTE_UNKNOWN_RESOURCE, ROUTE_LOGIN);
+        
+        // Once the application has been bootstrapped replace the existing pre-bootstrap methods with the
+        // registration methods. 
         
         hmssModule.controller = $controllerProvider.register;
         hmssModule.directive = $compileProvider.directive;
         hmssModule.filter = $filterProvider.register;
         hmssModule.factory = $provide.factory;
         hmssModule.service = $provide.service;
-
     }
 
 
