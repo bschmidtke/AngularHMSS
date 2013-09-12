@@ -8,7 +8,7 @@ define(['js/services/user/AgentService',
     //    // Define the route to this controller
     //    //$routeProvider.when(ROUTE_LOGIN.uri, { templateUrl: 'views/forms/login.html' });
     //})
-    hmssModule.controller('LoginController', function ($scope, $location, AgentService, AccessService, ROUTE_MAIN) {
+    hmssModule.controller('LoginController', function ($scope, $location, AgentService, AccessService, ROUTES) {
 
         $scope.attempts = 0;
         $scope.maximumAttempts = 3;
@@ -56,7 +56,7 @@ define(['js/services/user/AgentService',
         };
 
         $scope.accessLoadSuccessHandler = function (data, status, headers, config) {
-            $location.path(ROUTE_MAIN.uri);
+            $location.path(ROUTES.ROUTE_MAIN.uri);
         };
 
         $scope.accessLoadErrorHandler = function (data, status, headers, config) {

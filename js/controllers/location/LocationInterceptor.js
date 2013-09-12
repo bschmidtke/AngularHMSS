@@ -1,10 +1,9 @@
 ﻿define(['js/constants/RouteConstants',
         'js/services/user/AgentService',
-        'js/services/route/HmssRouteService'], function () {
+        'js/services/route/RouteService'], function () {
 
     var hmssModule = angular.module('hmssModule');
-    console.log("> registering LocationInterceptor");
-    hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService, HmssRouteService, ROUTE_LOGIN, ROUTE_INSUFFICIENT_CREDENTIALS) {
+    hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService, RouteService, ROUTES) {
 
         // undocumented
         $rootScope.$on("$locationChangeStart", function(angularEvent, newUrl, oldUrl) {
@@ -31,20 +30,20 @@
             if (AgentService.getUser() == null) {
                 // no logged user, we should be going to #login
                 $log.log("Redirecting to login.");
-                $location.path(ROUTE_LOGIN.uri);
+                $location.path(ROUTES.ROUTE_LOGIN.uri);
             } else {
 
                 // the path we are going to.
                 var path = $location.path();
 
-                var userAllowedAccess = HmssRouteService.hasAccess(path);
+                var userAllowedAccess = RouteService.hasAccess(path);
                 if (!userAllowedAccess) {
                     $log.log("User not allowed to access this area.");
                     // do not allow the user to continue.
                     // angularEvent.preventDefault();
 
                     // reroute to the insufficient credentials page
-                    $location.path(ROUTE_INSUFFICIENT_CREDENTIALS.uri);
+                    $location.path(ROUTES.ROUTE_INSUFFICIENT_CREDENTIALS.uri);
                 }
             }
         });
