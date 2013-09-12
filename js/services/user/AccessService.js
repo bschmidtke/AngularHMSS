@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var hmssModule = angular.module('hmssModule');
-hmssModule.factory('AccessService', function ($http, $rootScope)
+hmssModule.service('AccessService', function ($http, $rootScope)
     {
         // private variable
         var _allowedRoutes = null;

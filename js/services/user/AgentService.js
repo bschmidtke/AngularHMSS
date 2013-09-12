@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var hmssModule = angular.module('hmssModule');
-hmssModule.factory('AgentService', function ($http, $rootScope)
+hmssModule.service('AgentService', function ($http, $rootScope)
     {
         // private variable
         var _user = null;

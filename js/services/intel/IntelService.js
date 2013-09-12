@@ -7,7 +7,7 @@
  */
 
 var hmssModule = angular.module('hmssModule');
-hmssModule.factory('IntelService', function ($http, $rootScope) {
+hmssModule.service('IntelService', function ($http, $rootScope) {
     // private variable
     var _intel = [];
     

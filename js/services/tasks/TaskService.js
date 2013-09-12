@@ -1,5 +1,5 @@
 ﻿var hmssModule = angular.module('hmssModule');
-hmssModule.factory('TaskService', function ($http, $rootScope) {
+hmssModule.service('TaskService', function ($http, $rootScope) {
 
     // private variable
     var _tasks = [];
