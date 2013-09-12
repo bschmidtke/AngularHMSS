@@ -11,7 +11,7 @@
         <tbody id="gadgets" >
             <tr id="template" ng-repeat='gadget in gadgetData' class="gadget-item-row">
                 <td>{{gadget.name}}</td>
-                <td><img src="{{gadget.image}}" width="150"></td>
+                <td><img ng-src="{{gadget.image}}" width="150"></td>
                 <td>{{gadget.status}}</td>
             </tr>
         </tbody>

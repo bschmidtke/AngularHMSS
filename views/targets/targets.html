@@ -21,7 +21,7 @@
         </thead>
         <tbody class="targets-list" ng-repeat='target in getTargetData()'>
             <tr class="targets-row" ng-click="targetRowClicked(target);">
-                <td><img src="{{target.image}}" /></td>
+                <td><img ng-src="{{target.image}}" /></td>
                 <td>{{target.name}}</td>
                 <td>{{target.lastKnownLocation}}</td>
                 <td>{{target.status}}</td>
