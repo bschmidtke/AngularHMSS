@@ -1,7 +1,7 @@
 ﻿
 define(['js/services/user/AgentService',
         'js/services/user/AccessService',
-        'js/constants/RouteConstants'], function () {
+        'js/constants/Routes'], function () {
     
     var hmssModule = angular.module('hmssModule');
     //hmssModule.config(function ($routeProvider, ROUTE_LOGIN) {

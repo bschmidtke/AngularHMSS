@@ -1,4 +1,4 @@
-﻿define(['js/services/user/AccessService', 'js/constants/RouteConstants'], function () {
+﻿define(['js/services/user/AccessService', 'js/constants/Routes'], function () {
 
     var hmssModule = angular.module('hmssModule');
     

@@ -1,4 +1,4 @@
-﻿define(['js/constants/RouteConstants',
+﻿define(['js/constants/Routes',
         'js/services/user/AgentService',
         'js/services/route/RouteService'], function () {
 
