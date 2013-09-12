@@ -1,10 +1,6 @@
 ﻿define(['js/services/labs/LabsService'], function () {
     
     var hmssModule = angular.module('hmssModule');
-    //hmssModule.config(function ($routeProvider, ROUTE_LABS) {
-    //    // Define the route to this controller
-    //    $routeProvider.when(ROUTE_LABS.uri, { templateUrl: 'views/labs.html' });
-    //})
     hmssModule.controller('LabsController', function ($scope, $location, LabsService) {
         $scope.gadgetData = LabsService.getGadgets();
 
