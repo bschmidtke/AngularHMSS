@@ -1,9 +1,6 @@
 ﻿define(['js/services/user/AgentService'], function() {
 
-    console.log( "> Registering HeaderController" );
-
     var hmssModule = angular.module('hmssModule');
-    
     hmssModule.controller('HeaderController', function ($scope, AgentService) {
         $scope.sessionMessage = function() {
             var usr = AgentService.getUser();
