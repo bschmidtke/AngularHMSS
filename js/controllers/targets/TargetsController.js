@@ -3,7 +3,7 @@
     var hmssModule = angular.module('hmssModule');
     hmssModule.controller('TargetsController', function ($scope, $location, TargetsService) {
 
-        var _targetData = TargetsService.getTargets();
+        var _targetData = null;
 
         $scope.getTargetData = function() {
             return _targetData;
@@ -25,12 +25,6 @@
         $scope.zoom = 2; // the zoom level
 
         $scope.mapTypeId = google.maps.MapTypeId.SATELLITE;
-
-        $scope.checkForData = function() {
-            if ($scope.getTargetData() == null || $scope.getTargetData().length <= 0) {
-                TargetsService.loadTargets();
-            }
-        };
 
         $scope.buildTargetMarkers = function() {
             var updatedMarkers = [];
@@ -54,6 +48,13 @@
             $scope.setTargetData(data);
         });
 
-        $scope.checkForData();
+        if ($scope.getTargetData() == null || $scope.getTargetData().length <= 0) {
+            var targets = TargetsService.getTargets();
+            if (targets == null || targets.length <= 0) {
+                TargetsService.loadTargets();
+            } else {
+                $scope.setTargetData(targets);
+            }
+        }
     });
 });
