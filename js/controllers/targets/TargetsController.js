@@ -34,17 +34,6 @@
             }
         };
 
-        $scope.targetsSuccessHandler = function(data, status, headers, config) {
-
-            TargetsService.setTargets(data);
-
-            $scope.setTargetData(TargetsService.getTargets());
-        };
-
-        $scope.targetsErrorHandler = function(data, status, headers, config) {
-            var error = 'error';
-        };
-
         $scope.buildTargetMarkers = function() {
             var updatedMarkers = [];
             for (var index in _targetData) {
@@ -62,6 +51,10 @@
         $scope.targetRowClicked = function(target) {
             $location.path('/targetDetail/' + target.id);
         };
+        
+        $scope.$on('targetsChangedEvent', function (event, data) {
+            $scope.setTargetData(data);
+        });
 
         $scope.checkForData();
     });

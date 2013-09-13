@@ -5,7 +5,6 @@
     hmssModule.controller('TasksController', function ($scope, $location, AgentService, TaskService) {
 
         $scope.agent = AgentService.currentUser();
-
         $scope.taskData = TaskService.getTasks();
 
         $scope.getImageForPriority = function(priority) {
@@ -28,22 +27,13 @@
 
         $scope.checkForData = function() {
             if ($scope.taskData == null || $scope.taskData.length <= 0) {
-                var promise = TaskService.loadTasks();
-                promise.success($scope.taskSuccessHandler);
-                promise.error($scope.taskErrorHandler);
+                TaskService.loadTasks();
             }
         };
 
-        $scope.taskSuccessHandler = function(data, status, headers, config) {
-
-            TaskService.setTasks(data);
-
-            $scope.taskData = TaskService.getTasks();
-        };
-
-        $scope.taskErrorHandler = function(data, status, headers, config) {
-            var error = 'error';
-        };
+        $scope.$on( 'tasksChangedEvent', function( event, data ) {
+            $scope.taskData = data;
+        } );
 
         $scope.checkForData();
     });

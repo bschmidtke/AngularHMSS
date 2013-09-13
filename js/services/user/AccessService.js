@@ -11,42 +11,34 @@ hmssModule.service('AccessService', function ($http, $rootScope)
         // private variable
         var _allowedRoutes = null;
 
-        return {
-            getAllowedRoutes: function () {
-                return _allowedRoutes;
-            },
-            loadAccess: function (role) {
-                var promise = $http({ method: 'GET', url: ('assets/data/access/MI6/' + role + '/' + role + '-access.txt') });
-                promise.success(accessLoadedSuccess);
-                promise.error(accessLoadErrorHandler);
-                return promise;
-            }
-        };
+        function getAllowedRoutes() {
+            return _allowedRoutes;
+        }
     
         function setAllowedRoutes(val) {
             _allowedRoutes = val;
-            $rootScope.$broadcast('accessChangedEvent');
+            $rootScope.$broadcast('accessChangedEvent', _allowedRoutes);
         };
+    
+        function loadAccess(role) {
+            var promise = $http({ method: 'GET', url: ('assets/data/access/MI6/' + role + '/' + role + '-access.txt') });
+            promise.success(accessLoadedSuccess);
+            promise.error(accessLoadErrorHandler);
+            return promise;
+        }
 
         function accessLoadedSuccess(data, status, headers, config) {
             setAllowedRoutes(data);
         };
 
         function accessLoadErrorHandler(data, status, headers, config) {
-            
+            // TODO: Future Error Handling
+        };
+
+        // Return Public Service API
+        return {
+            getAllowedRoutes: getAllowedRoutes,
+            loadAccess: loadAccess
         };
     }
 );
-
-/*
-angular.module('hmssModule').factory('Agent', function($resource){
-        return $resource('assets/data/login/MI6/:agentId.txt',
-            {},
-            {
-                query: {method:'GET',
-                        params:{agentId:'007'},
-                        isArray:false}
-            }
-        );
-    });
-*/
