@@ -76,6 +76,14 @@ define(['js/constants/Routes',
                         templateUrl: 'views/targets/targetDetails.html',
                         dependencies: ['js/controllers/targets/TargetDetailController']
                     },
+                    ,
+                    // Target Detail Location
+                    {
+                        path: routeTable.ROUTE_TARGET_LOCATION.uri,
+                        isPublic: false,
+                        templateUrl: 'views/targets/targetLocation.html',
+                        dependencies: ['js/controllers/targets/TargetLocationController']
+                    },
                     // Tasks
                     {
                         path: routeTable.ROUTE_TASKS.uri,

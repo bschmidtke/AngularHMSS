@@ -49,7 +49,9 @@
         });
 
         if ($scope.getTargetData() == null || $scope.getTargetData().length <= 0) {
+            
             var targets = TargetsService.getTargets();
+            
             if (targets == null || targets.length <= 0) {
                 TargetsService.loadTargets();
             } else {
