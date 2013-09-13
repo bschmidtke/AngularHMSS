@@ -27,7 +27,7 @@
         */
         $rootScope.$on("$routeChangeStart", function(next, current) {
             $log.log("route change start");
-            if (AgentService.getUser() == null) {
+            if (AgentService.currentUser() == null) {
                 // no logged user, we should be going to #login
                 $log.log("Redirecting to login.");
                 $location.path(ROUTES.ROUTE_LOGIN.uri);

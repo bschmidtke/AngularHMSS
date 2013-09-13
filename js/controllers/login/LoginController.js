@@ -43,7 +43,7 @@ define(['js/services/user/AgentService',
         };
 
         $scope.loginSuccessHandler = function (data, status, headers, config) {
-            var agent = AgentService.getUser();
+            var agent = AgentService.currentUser();
 
             var accessPromise = AccessService.loadAccess(agent.role);
             accessPromise.success($scope.accessLoadSuccessHandler);

@@ -3,20 +3,35 @@ hmssModule.service('LabsService', function ($http, $rootScope)
 {
     
     // private variable
-    var _gadgets = [];
+    var _gadgets = null;
     
-    return {
-        getGadgets: function () {
-            return _gadgets;
-        },
-        setGadgets: function (val) {
-            _gadgets = val;
+    function getGadgets () {
+        return _gadgets;
+    }
 
-            $rootScope.$broadcast('gadgetsChangedEvent');
-        },
-        loadGadgets: function () {
-            return $http({ method: 'GET', url: ('assets/data/gadgets.txt') });
-        }
+    function setGadgets (val) {
+        _gadgets = val;
+        $rootScope.$broadcast('gadgetsChangedEvent', _gadgets);
     }
     
+    function loadGadgets () {
+        var promise = $http({ method: 'GET', url: ('assets/data/gadgets.txt') });
+        promise.success(gadgetSuccessHandler);
+        promise.error(gadgetErrorHandler);
+            
+    }
+    
+    function gadgetSuccessHandler (data, status, headers, config) {
+        setGadgets(data);
+    };
+
+    function gadgetErrorHandler (data, status, headers, config) {
+        // TODO: future error handling
+    }
+
+    return {
+        getGadgets: getGadgets,
+        loadGadgets: loadGadgets
+    };
+
 });

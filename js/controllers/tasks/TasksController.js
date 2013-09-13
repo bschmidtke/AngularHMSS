@@ -4,7 +4,7 @@
     var hmssModule = angular.module('hmssModule');
     hmssModule.controller('TasksController', function ($scope, $location, AgentService, TaskService) {
 
-        $scope.agent = AgentService.getUser();
+        $scope.agent = AgentService.currentUser();
 
         $scope.taskData = TaskService.getTasks();
 

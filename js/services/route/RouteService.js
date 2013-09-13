@@ -4,6 +4,7 @@
     
     hmssModule.service('RouteService', function ($route, AccessService, ROUTES)
     {
+
         return {
             getRoute: function (path) {
 
