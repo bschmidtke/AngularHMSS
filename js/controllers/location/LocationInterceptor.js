@@ -6,7 +6,7 @@
     hmssModule.controller('LocationInterceptor', function ($rootScope, $location, $log, AgentService, RouteService, ROUTES) {
 
         // undocumented
-        $rootScope.$on("$locationChangeStart", function(angularEvent, newUrl, oldUrl) {
+        $rootScope.$on("$locationChangeStart", function (event, newUrl, oldUrl) {
 
             // the path we are going to.
             var path = $location.path();
@@ -16,7 +16,7 @@
         });
 
         // undocumented
-        $rootScope.$on("$locationChangeSuccess", function(angularEvent, newUrl, oldUrl) {
+        $rootScope.$on("$locationChangeSuccess", function (event, newUrl, oldUrl) {
             $log.log("location change success");
         });
 
@@ -25,18 +25,14 @@
         // needed for the route change to occurs. Typically this involves fetching the view template as well as any 
         // dependencies defined in resolve route property. Once all of the dependencies are resolved $routeChangeSuccess is fired.
         */
-        $rootScope.$on("$routeChangeStart", function(next, current) {
+        $rootScope.$on("$routeChangeStart", function(event, next, current) {
             $log.log("route change start");
             if (AgentService.currentUser() == null) {
                 // no logged user, we should be going to #login
                 $log.log("Redirecting to login.");
                 $location.path(ROUTES.ROUTE_LOGIN.uri);
             } else {
-
-                // the path we are going to.
-                var path = $location.path();
-
-                var userAllowedAccess = RouteService.hasAccess(path);
+                var userAllowedAccess = RouteService.hasAccess(next.path);
                 if (!userAllowedAccess) {
                     $log.log("User not allowed to access this area.");
                     // do not allow the user to continue.
@@ -49,17 +45,17 @@
         });
 
         // Broadcasted if any of the resolve promises are rejected.
-        $rootScope.$on("$routeChangeError", function(current, previous, rejection) {
+        $rootScope.$on("$routeChangeError", function(event, current, previous, rejection) {
             $log.log("route change error");
         });
 
         //Broadcasted after a route dependencies are resolved. ngView listens for the directive to instantiate the controller and render the view.
-        $rootScope.$on("$routeChangeSuccess", function(angularEvent, current, previous) {
+        $rootScope.$on("$routeChangeSuccess", function (event, current, previous) {
             $log.log("route change success");
         });
 
         // The reloadOnSearch property has been set to false, and we are reusing the same instance of the Controller.
-        $rootScope.$on("$routeUpdate", function(newUrl, oldUrl) {
+        $rootScope.$on("$routeUpdate", function (event, newUrl, oldUrl) {
             $log.log("route update");
         });
     });

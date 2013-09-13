@@ -46,12 +46,14 @@
 
                     var destinationRoute = this.getRoute(path);
 
-                    for (var item in accessList) {
-                        var accessItem = accessList[item];
-                        if (accessItem != null) {
-                            var accessRoute = this.getRouteByKey( accessItem );
-                            if (destinationRoute === accessRoute) {
-                                return true;
+                    if (destinationRoute != null) {
+                        for (var item in accessList) {
+                            var accessItem = accessList[item];
+                            if (accessItem != null) {
+                                var accessRoute = this.getRouteByKey( accessItem );
+                                if (destinationRoute === accessRoute) {
+                                    return true;
+                                }
                             }
                         }
                     }
