@@ -28,9 +28,7 @@
 
         $scope.checkForData = function() {
             if ($scope.getTargetData() == null || $scope.getTargetData().length <= 0) {
-                var promise = TargetsService.loadTargets();
-                promise.success($scope.targetsSuccessHandler);
-                promise.error($scope.targetsErrorHandler);
+                TargetsService.loadTargets();
             }
         };
 
