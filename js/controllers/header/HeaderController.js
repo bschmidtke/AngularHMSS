@@ -1,21 +1,13 @@
-﻿function HeaderController($scope, AgentService)
-{
-    $scope.sessionMessage = function()
-    {
-        var usr = AgentService.getUser();
-        return $scope.showUser(usr);
-    };
+﻿define(['js/services/user/AgentService'], function() {
 
-    $scope.showUser = function(usr)
-    {
-        if (usr != null)
-        {
-            return ("Welcome: (" + usr.codeName + ") " + usr.lastName + ", " + usr.firstName);
-        }
-        else
-        {
-            return "Not Signed In.";
-        }
-    };
+    var hmssModule = angular.module('hmssModule');
+    hmssModule.controller('HeaderController', function ($scope) {
 
-}
+        $scope.usr = null;
+
+        $scope.$on( 'agentChangedEvent', function( event, data ) {
+            $scope.usr = data;
+        } );
+        
+    });
+});

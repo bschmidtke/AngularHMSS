@@ -2,15 +2,15 @@
     <div class="login-main">
         <div class="username-row">
             <label class="username-txt">Codename: </label>
-            <input name="user_name" class="username-field" autocomplete="on" data-ng-model="newUser.userName" />
+            <input name="user_name" class="username-field" ng-model="newUser.userName" />
         </div>
         <div class="passcode-row">
             <label class="password-txt">Passcode: </label>
-            <input name="password" type="password" class="password-field" autocomplete="on" value="" data-ng-model="newUser.password" />
+            <input name="password" type="password" class="password-field" value="" ng-model="newUser.password" />
         </div>
         <div class="login-btn-row">
-            <div class="login-button" data-ng-click="attemptLogin();">login</div>
-            <label class="login-error-msg" data-ng-show="isError">{{currentErrorMsg}}</label>
+            <div class="login-button" ng-click="attemptLogin();">login</div>
+            <label class="login-error-msg" ng-show="isError">{{currentErrorMsg}}</label>
         </div>
     </div>
 </div>

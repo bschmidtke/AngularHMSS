@@ -2,7 +2,10 @@
     <div class="navbar-inner">
         <div class="container-fluid">
             <span class="header-brand">HMSS</span>
-            <span id="userName" class="header-username-text pull-right">{{sessionMessage()}}.</span>
+            <span class="header-username-text pull-right" ng-switch on="!!usr">
+                <div ng-switch-when="true">Welcome: ( {{usr.codeName}} ) {{ usr.lastName }}, {{ usr.firstName }}.</div>
+                <div ng-switch-default>Not Signed In.</div>
+            </span>
         </div>
     </div>
 </div>

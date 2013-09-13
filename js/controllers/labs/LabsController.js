@@ -1,29 +1,20 @@
-﻿var hmssModule = angular.module('hmssModule');
-hmssModule.controller('LabsController', function($scope, $location, LabsService)
-{
-    $scope.gadgetData = LabsService.getGadgets();
+﻿define(['js/services/labs/LabsService'], function () {
     
-
-    $scope.checkForData = function () {
-        if ($scope.gadgetData == null || $scope.gadgetData.length <= 0) {
-            var promise = LabsService.loadGadgets();
-            promise.success($scope.gadgetSuccessHandler);
-            promise.error($scope.gadgetErrorHandler);
-        }
-    };
-
-    $scope.gadgetSuccessHandler = function (data, status, headers, config) {
-
-        LabsService.setGadgets(data);
-
+    var hmssModule = angular.module('hmssModule');
+    hmssModule.controller('LabsController', function ($scope, $location, LabsService)
+    {
         $scope.gadgetData = LabsService.getGadgets();
-    };
 
-    $scope.gadgetErrorHandler = function (data, status, headers, config) {
-        var error = 'error';
-    };
+        $scope.checkForData = function() {
+            if ($scope.gadgetData == null || $scope.gadgetData.length <= 0) {
+                LabsService.loadGadgets();
+            }
+        };
 
-    $scope.checkForData();
+        $scope.$on("gadgetsChangedEvent", function (event, data) {
+            $scope.gadgetData = data;
+        });
 
-}
-);
+        $scope.checkForData();
+    });
+});

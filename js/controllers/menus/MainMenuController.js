@@ -5,46 +5,28 @@
  * Time: 12:29 PM
  * To change this template use File | Settings | File Templates.
  */
-var hmssModule = angular.module('hmssModule');
-hmssModule.controller('MainMenuController', function ($scope, $location, AgentService)
-{
+define(['js/services/user/AgentService'], function () {
+    
+    var hmssModule = angular.module('hmssModule');
+    hmssModule.controller('MainMenuController', function ($scope, $location, AgentService) {
 
-    $scope.menuItems = [];
+        $scope.menuItems = null;
+        
+        $scope.$on( 'agentChangedEvent', function( event, data ) {
+            if (data != null) {
+                AgentService.loadMenu( data.role );
+            } else {
 
-    $scope.sessionCheck = function ()
-    {
-        var usr = AgentService.getUser();
-        return !( usr == null );
-    },
+            }
+        } );
 
-    $scope.$on('agentChangedEvent', function(event, next, current)
-    {
-        var usr = AgentService.getUser();
-        if( usr != null )
-        {
-            var promise = AgentService.loadMenu( usr.role );
-            promise.success( $scope.menuLoadedSuccess );
-            promise.error( $scope.menuLoadErrorHandler );
-        }
-        else
-        {
+        $scope.$on( 'userMenuChangedEvent', function( event, data ) {
+            $scope.menuItems = data;
+        } );
 
-        }
-    }),
-
-    $scope.menuLoadedSuccess = function (data, status, headers, config)
-    {
-        $scope.menuItems = data;
-    },
-
-    $scope.menuLoadErrorHandler = function (data, status, headers, config)
-    {
-
-    },
-
-    $scope.itemClicked = function ( selectedItem )
-    {
-        $location.path( selectedItem.route );
-    };
-
-})
+        $scope.itemClicked = function( selectedItem ) {
+            $location.path( selectedItem.route );
+        };
+    });
+    
+});
